@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ArrowUpRight, Expand } from 'lucide-react';
@@ -18,7 +18,7 @@ export function GallerySection() {
   const [open, setOpen] = useState<number | null>(null);
   const items = galleryItems.slice(0, 8);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const ctx = gsap.context(() => {
       const mm = gsap.matchMedia();
@@ -50,7 +50,9 @@ export function GallerySection() {
         });
       });
     }, section);
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+    };
   }, []);
 
   const lbItems = items.map((g) => ({ src: img[g.image].src, alt: img[g.image].alt, title: g.title, caption: "Visuel d'illustration" }));

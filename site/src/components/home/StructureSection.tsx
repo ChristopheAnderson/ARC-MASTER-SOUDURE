@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Steel3D } from '@/components/three/Steel3D';
@@ -20,7 +20,7 @@ export function StructureSection() {
   const [active, setActive] = useState(0);
   const bar = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce) {
       progress.current = 1;
@@ -48,7 +48,9 @@ export function StructureSection() {
         ScrollTrigger.create({ trigger: section.current, start: 'top 70%', end: 'bottom 40%', scrub: true, onUpdate: update });
       });
     }, section);
-    return () => ctx.revert();
+    return () => {
+      ctx.revert();
+    };
   }, []);
 
   return (
