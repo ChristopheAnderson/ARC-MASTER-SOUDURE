@@ -104,3 +104,4 @@ Le back-office est accessible via la route `/admin/login`.
 ## 📄 Licence
 
 Tous droits réservés © ARC MASTER SOUDURE.
+

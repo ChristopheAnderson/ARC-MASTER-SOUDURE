@@ -44,20 +44,12 @@ export function Header() {
 
   const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, item: NavItem) => {
     setOpen(false);
-    // Sur la page d'accueil, faire défiler de manière fluide vers la section
-    if (pathname === '/' && item.hash) {
-      const target = document.querySelector(item.hash);
-      if (target) {
-        e.preventDefault();
-        const l = getLenis();
-        if (l) {
-          l.scrollTo(target as HTMLElement, { offset: -90 });
-        } else {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-        window.history.pushState(null, '', item.hash);
-        return;
-      }
+    // Si l'utilisateur clique sur le lien de la page où il se trouve déjà, remonter en haut
+    if (pathname === item.to) {
+      e.preventDefault();
+      const l = getLenis();
+      if (l) l.scrollTo(0, { immediate: false });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
