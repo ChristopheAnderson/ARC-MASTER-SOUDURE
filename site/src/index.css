@@ -1,0 +1,159 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/space-grotesk';
+
+/* ===========================================================
+   ARC MASTER SOUDURE — Design system (Light mode exclusif)
+   =========================================================== */
+@theme {
+  --color-white: #ffffff;
+  --color-mist: #f4f6f8;
+  --color-mist-2: #eaeef2;
+  --color-navy: #17324d;
+  --color-navy-deep: #10243a;
+  --color-ember: #f07832;
+  --color-ember-dark: #c95a17;
+  --color-ember-soft: #fdeee4;
+  --color-steel: #a8b0b8;
+  --color-steel-light: #d5dae0;
+  --color-ink: #263442;
+  --color-ink-soft: #5b6875;
+
+  --font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Space Grotesk Variable', 'Space Grotesk', 'Inter Variable', system-ui, sans-serif;
+
+  --radius-xl2: 1.25rem;
+  --radius-xl3: 1.75rem;
+
+  --shadow-soft: 0 1px 2px rgb(16 36 58 / 0.04), 0 8px 24px -8px rgb(16 36 58 / 0.1);
+  --shadow-lift: 0 2px 4px rgb(16 36 58 / 0.04), 0 24px 48px -16px rgb(16 36 58 / 0.22);
+  --shadow-ember: 0 10px 30px -10px rgb(240 120 50 / 0.55);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  body {
+    @apply bg-white font-sans text-ink antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight text-navy-deep;
+  }
+  ::selection {
+    background: var(--color-ember);
+    color: white;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-ember);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@layer components {
+  .container-x {
+    @apply mx-auto w-full max-w-[1320px] px-5 sm:px-8 lg:px-12;
+  }
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-display text-xs font-semibold uppercase tracking-[0.22em] text-ember;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply inline-block h-px w-7 bg-ember;
+  }
+  .display-xl {
+    @apply font-display font-semibold leading-[0.95] tracking-[-0.035em];
+    font-size: clamp(2.6rem, 7.2vw, 6.6rem);
+  }
+  .display-lg {
+    @apply font-display font-semibold leading-[1.02] tracking-[-0.03em];
+    font-size: clamp(2.1rem, 4.6vw, 4rem);
+  }
+  .display-md {
+    @apply font-display font-semibold leading-[1.08] tracking-[-0.02em];
+    font-size: clamp(1.6rem, 2.8vw, 2.5rem);
+  }
+  .lead {
+    @apply text-base leading-relaxed text-ink-soft sm:text-lg;
+  }
+  .card {
+    @apply rounded-xl3 border border-mist-2 bg-white shadow-soft;
+  }
+  .field {
+    @apply w-full rounded-xl border border-steel-light bg-white px-4 py-3.5 text-[15px] text-ink placeholder:text-steel transition-[border-color,box-shadow] duration-200 outline-none focus:border-ember focus:ring-4 focus:ring-ember/15;
+  }
+  .field[aria-invalid='true'] {
+    @apply border-red-500 focus:ring-red-500/15;
+  }
+  .label {
+    @apply mb-2 block text-sm font-medium text-navy-deep;
+  }
+  .badge-illus {
+    @apply inline-flex items-center gap-1.5 rounded-full bg-white/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-ink-soft backdrop-blur;
+  }
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, rgb(23 50 77 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(23 50 77 / 0.05) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+  .text-gradient-ember {
+    background: linear-gradient(100deg, #f07832 0%, #ffb37a 45%, #c95a17 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .metal-sheen {
+    background: linear-gradient(135deg, #ffffff 0%, #eef1f4 35%, #d9dee4 50%, #f4f6f8 65%, #ffffff 100%);
+  }
+}
+
+@layer utilities {
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .perspective {
+    perspective: 1200px;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
